@@ -10,6 +10,7 @@ import HomePage from '../pages/HomePage'
 import IngresantesPageEntreAnios from '../pages/ingresantes/IngresantesPageEntreAnios'
 import InscriptosPageEntreAnios from '../pages/inscriptos/InscriptosPageEntreAnios'
 import AlumnosPage from '../pages/alumnos/AlumnosPage'
+import AlumnosCohorteDesgrana from '../pages/alumnos/AlumnosCohorteDesgrana'
 
 const AppRoutes = () => {
   return (
@@ -23,6 +24,8 @@ const AppRoutes = () => {
             <Route exact path='/ingresantesanios' element={<IngresantesPageEntreAnios/>} />
             <Route exact path='/ingresantes' element={<IngresantesPage/>} />
             <Route exact path='/alumnos' element={<AlumnosPage/>} />
+
+            <Route exact path='/cohortedesme' element={<AlumnosCohorteDesgrana/>} />
 
             <Route path='*' element={<NotFoundPage />} />
         </Routes>

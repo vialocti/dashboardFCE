@@ -41,7 +41,7 @@ const NavBarComponent = () => {
             </a>
             <ul className="dropdown-menu">
               <li><Link to='/alumnos' className="dropdown-item">Alumnos Activos</Link></li>
-              <li><a className="dropdown-item" href="#">Reinscriptos</a></li>
+              <li><Link to='/cohortedesme' className="dropdown-item">Cohorte Propuesta</Link></li>
               
             </ul>
           </li>

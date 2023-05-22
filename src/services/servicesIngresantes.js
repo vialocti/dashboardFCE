@@ -37,4 +37,16 @@ export const traerIngresantesEntreAnios = async (anioi, aniof) => {
     } catch (error) {
         console.log(error)
     }
-} 
+}
+
+
+//traer ingresantes anio sede propuesta tipo
+
+export const traerIngresantesSedePropuestaTipo = async (anio, sede, carrera, tipoI) => {
+    try {
+        const rows = await axios.get(`${uri}/ingresantesaspi/${anio}/${sede}/${carrera}/${tipoI}`)
+        return rows.data
+    } catch (error) {
+        console.log(error)
+    }
+}
