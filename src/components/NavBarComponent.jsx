@@ -6,7 +6,7 @@ const NavBarComponent = () => {
     <div style={{margin:'10px'}}>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container-fluid">
-      <a className="navbar-brand" href="#">FCE-DASH</a>
+      <Link to='/' className="navbar-brand">FCE-DASH</Link>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -15,7 +15,7 @@ const NavBarComponent = () => {
           
           
           <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a className="nav-link dropdown-toggle" href='.' role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Inscriptos
             </a>
             <ul className="dropdown-menu">
@@ -25,7 +25,7 @@ const NavBarComponent = () => {
             </ul>
           </li>
           <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a className="nav-link dropdown-toggle" href="." role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Ingresantes
             </a>
             <ul className="dropdown-menu">
@@ -36,7 +36,7 @@ const NavBarComponent = () => {
           </li>
 
           <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a className="nav-link dropdown-toggle" href="." role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Alumnos
             </a>
             <ul className="dropdown-menu">

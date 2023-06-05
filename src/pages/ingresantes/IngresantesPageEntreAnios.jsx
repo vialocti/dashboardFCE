@@ -99,14 +99,23 @@ const IngresantesPageEntreAnios = () => {
     </Wrapper>
     <br />
     <div className="row">
-     
+      <h3>Ingresantes</h3>
+    </div>
+    <div className="row">
+      
+     <table className='table table-bordered'>
+       <tr>
+        <th>Año</th>
+        <th>Nro.Ingresantes</th>
+       </tr>
     {ingreAnios ? ingreAnios.map((ele,index) =>
-         <ol>
-         <li key={index} value={ele.anio}>{ele.total.canti}</li> 
+         <tr key={index}>
+         <td>{ele.anio}</td> 
+         <td>{ele.total.canti}</td> 
         
-        </ol>
+        </tr>
       ):null}   
-     
+     </table>
     </div>
    </div>
   )

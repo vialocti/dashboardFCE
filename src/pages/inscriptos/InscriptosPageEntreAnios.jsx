@@ -99,14 +99,22 @@ const InscriptosPageEntreAnios = () => {
     </Wrapper>
     <br />
     <div className="row">
-     
+      <h3>Inscripciones</h3>
+    </div>
+    <div className="row">
+     <table className='table table-bordered'>
+      <tr>
+        <th>Año Inscripcion</th>
+        <th>Nro.Inscriptos</th>
+      </tr>
     {inscripAnios ? inscripAnios.map((ele,index) =>
-         <ol>
-         <li key={index} value={ele.anio}>{ele.total.catidad}</li> 
+         <tr key={index} >
+         <td>{ele.anio}</td>
+         <td>{ele.total.catidad}</td> 
         
-        </ol>
+        </tr>
       ):null}   
-     
+     </table>
     </div>
    </div>
   )
