@@ -41,7 +41,18 @@ const NavBarComponent = () => {
             </a>
             <ul className="dropdown-menu">
               <li><Link to='/alumnos' className="dropdown-item">Alumnos Activos</Link></li>
-              <li><Link to='/cohortedesme' className="dropdown-item">Cohorte Propuesta</Link></li>
+              <li><Link to='/cohortedesme' className="dropdown-item">Desgranamiento Cohorte</Link></li>
+              
+            </ul>
+          </li>
+
+          <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="." role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Egresados
+            </a>
+            <ul className="dropdown-menu">
+              <li><Link to='/egrepromedio' className="dropdown-item">Promedio Egresados Anio</Link></li>
+              <li><Link to='/' className="dropdown-item">Listado Egresados</Link></li>
               
             </ul>
           </li>

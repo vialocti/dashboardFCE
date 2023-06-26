@@ -11,6 +11,7 @@ import IngresantesPageEntreAnios from '../pages/ingresantes/IngresantesPageEntre
 import InscriptosPageEntreAnios from '../pages/inscriptos/InscriptosPageEntreAnios'
 import AlumnosPage from '../pages/alumnos/AlumnosPage'
 import AlumnosCohorteDesgrana from '../pages/alumnos/AlumnosCohorteDesgrana'
+import EgresadosAnioPromedioPage from '../pages/egresados/EgresadosAnioPromedioPage'
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
 
             <Route exact path='/cohortedesme' element={<AlumnosCohorteDesgrana/>} />
 
+            <Route exact path='/egrepromedio' element={<EgresadosAnioPromedioPage />} />
             <Route path='*' element={<NotFoundPage />} />
         </Routes>
         

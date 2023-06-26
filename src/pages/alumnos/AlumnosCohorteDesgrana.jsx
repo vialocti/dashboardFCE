@@ -1,9 +1,9 @@
 import React,{useEffect,useState} from 'react'
 
-import { Wrapper, Button, SelectorV, LabelF, MiniButton } from '../../styled-components/FormStyles'
+import { Wrapper, SelectorV, LabelF, MiniButton } from '../../styled-components/FormStyles'
 import { traerDesmebraCohorte } from '../../services/servicesAlumnos'
 import {traerIngresantesSedePropuestaTipo} from '../../services/servicesIngresantes'
-//import BarChart from '../../components/graficos/BarChart'
+import BarChart from '../../components/graficos/BarChart'
 
 
 
@@ -12,11 +12,12 @@ const AlumnosCohorteDesgrana = () => {
   //const [cantidad, setCantidad]= useState(0)
   const [ingreAnio, setIngreAnio]=useState(null)
   const [alumnosDes, setAlumnosDes] = useState(null)
+  const [labels, setLabels]=useState(null)
   const [anioI,setAnioI] = useState(1)
   const [anioFC,setAnioFC] = useState(1)
   const [sede, setSede]=useState(1)
   const [carrera, setCarrera] = useState(1)
-  //const [datos,setDatos]=useState(null)
+  const [datos,setDatos]=useState(null)
   
   
   useEffect(()=>{
@@ -24,21 +25,25 @@ const AlumnosCohorteDesgrana = () => {
     const getTraerDatos = async ()=>{
       
         console.log('eureka')
-     /*
-        setDatos(
-          {
+     
+        setDatos(alumnosDes.map((data)=>data.total.reinsc))
+        setLabels(alumnosDes.map((data)=>data.anio))
+        /*{
+            
             labels:alumnosDes.map((data)=>data.anio),
             datasets:[{
               label:"Numero de Reinsc",
               data:alumnosDes.map((data)=>data.total.reinsc)
             }]
+          
           }
         )
-
-    */
-    }
+*/
     
+    }
+    if(alumnosDes){
     getTraerDatos()
+    }
   },[alumnosDes])
   
 /*
@@ -65,6 +70,41 @@ const AlumnosCohorteDesgrana = () => {
     setAlumnosDes( await traerDesmebraCohorte(anioI, sede, carrera, anioFC,1))
     }
     
+  }
+
+  const traerCarrera=(carrera)=>{
+    if(carrera==='1'){
+      return 'Contador Pub.Nacional'
+    }else if(carrera==='2'){
+      return 'Lic.Administración'
+    }else if(carrera==='3'){
+      return 'Lic.Economía'
+    }else if(carrera==='6'){
+      return 'Lic.Gestión Neg.Regionales'
+    }else if(carrera==='7'){
+      return 'Lic.Logogistica'
+      
+    }else if(carrera==='8'){
+      return 'Contador Público'
+    }
+
+  }
+
+    const traerSede=(sede)=>{
+      if(sede==='1'){
+        return 'Mendoza'
+      }else if(sede==='2'){
+        return 'San Rafael'
+      }else if(sede==='3'){
+        return 'Gral.Alvear'
+      }else if(sede==='4'){
+        return 'Sede Este'
+      }else{
+        return ''
+      }
+  
+
+
   }
 
   
@@ -139,14 +179,14 @@ const AlumnosCohorteDesgrana = () => {
     </Wrapper>
     <br />
     <div className="row">
-      <h3>Desgranamiento Cohorte</h3>
-    </div>
-    <div className='row'>
-      <div className="col-md-3">
-          <h5>Año Ingreso :{anioI>2014?anioI:null}</h5>  
+      <div className="col-md-7">
+      <h6>Desgranamiento Cohorte: sede:{traerSede(sede)}, carrera:{traerCarrera(carrera)}</h6>
       </div>
-      <div className="col-md-3">
-        <h5>Cantidad Ingresantes:{ingreAnio?ingreAnio[0].canti:0}</h5>
+      <div className="col-md-2">
+          <h6>Año Ingreso: {anioI>2014?anioI:null}</h6>  
+      </div>
+      <div className="col-md-2">
+        <h6>Ingresantes:{ingreAnio?ingreAnio[0].canti:0}</h6>
       </div>
 
       
@@ -154,29 +194,40 @@ const AlumnosCohorteDesgrana = () => {
       <hr />
     </div>
     <div className="row">
-     <div className="col-md-5">
-      <table className='table table-bordered'>
-       <tr className='table-primary'>
+     <div className="col-md-3">
+      <br/>
+      <table className='table table-bordered table-striped'>
+       <thead>
+       <tr>
         <th>Año</th>
         <th>Reinscriptos</th>
-        </tr> 
+        <th>%Ingresantes</th>
         
+        </tr> 
+      </thead>
+      <tbody>
     {alumnosDes ? alumnosDes.map((ele,index) =>
          
          <tr key={index}>
           <td>{ele.anio}</td>
           <td>{ele.total.reinsc}</td>
+          <td>{Number(ele.total.reinsc/ingreAnio[0].canti * 100).toFixed(2)}</td>
+          
           
         </tr> 
         
         
       ):null} 
+      </tbody>
       </table>  
      </div>
-     <div className="col-md-6">
-      
+     <div className='col-md-2'></div>
+     <div className="col-md-5" style={{width:'50%',height:'300px'}}>
+     { alumnosDes? <BarChart datos={datos} etiquetas={labels} />:null}      
        </div>
-    </div>
+     </div>
+    
+    
    </div>
   )
 }

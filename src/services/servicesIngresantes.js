@@ -1,14 +1,41 @@
 import axios from 'axios'
 
-//const uri = 'http://localhost:5000/dbingreso'
-const uri = 'http://200.12.136.75:5000/dbingreso'
+const uri = 'http://localhost:5000/dbingreso'
+//const uri = 'http://200.12.136.75:5000/dbingreso'
+
+const tratamientoDatos = (datos) => {
+
+    const anioscomp = []
+
+
+    datos.map((item) => {
+        const ingreParray = item.total.filter(ele => ele.tipo_ingreso !== 6)
+        const sumaIN = ingreParray.map(item => item.canti).reduce((prev, curr) => prev + Number(curr), 0);
+        const ingreICarray = item.total.filter(ele => ele.tipo_ingreso === 6)
+        const sumaIC = ingreICarray.map(item => item.canti).reduce((prev, curr) => prev + Number(curr), 0);
+
+        let objti = { anio: item.anio, totalI: sumaIN, totalIC: sumaIC }
+
+        anioscomp.push(objti)
+
+        // console.log(item.anio, sumaIN, sumaIC)
+
+
+    })
+    //console.log(anioscomp)
+
+    return anioscomp
+}
+
+
+
 
 
 export const traerCantidadIngreso = async (anio) => {
 
     try {
         const rows = await axios.get(`${uri}/ingreTotalAnio/${anio}`)
-        //console.log(rows)
+        console.log(rows)
         return rows.data
 
     } catch (error) {
@@ -21,6 +48,7 @@ export const traerCantidadIngresoUbicacion = async (anio) => {
     try {
 
         const rows = await axios.get(`${uri}/ingresantesTotalIngresoAnioUbi/${anio}`)
+        console.log(rows.data)
         return rows.data
     } catch (error) {
         console.log(error)
@@ -33,12 +61,15 @@ export const traerIngresantesEntreAnios = async (anioi, aniof) => {
     try {
 
         const rows = await axios.get(`${uri}/ingreTotalTanio/${anioi}/${aniof}`)
-        return rows.data
+        return tratamientoDatos(rows.data)
+
     } catch (error) {
         console.log(error)
     }
 }
 
+//const suma = ingreAnios.map(item => item.totali.canti).reduce((prev, curr) => prev + Number(curr), 0);
+//        console.log(suma, ingreAnios)
 
 //traer ingresantes anio sede propuesta tipo
 

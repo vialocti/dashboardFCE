@@ -4,17 +4,20 @@ import axios from 'axios'
 
 export const usePageInicial = (anio) => {
     //const anio='2022'
-    const uri_e = 'http://localhost:5000/dbegresados'
-    const uri_i = 'http://localhost:5000/dbinscriptos'
-    const uri_a = 'http://localhost:5000/alutivos'
-    // const uri_e = 'http://200.12.136.75:5000/dbegresados'
-    // const uri_i = 'http://200.12.136.75:5000/dbinscriptos'
-    // const uri_a = 'http://200.12.136.75:5000/alutivos'
+    //const uri_e = 'http://localhost:5000/dbegresados'
+    //const uri_i = 'http://localhost:5000/dbinscriptos'
+    //const uri_a = 'http://localhost:5000/alutivos'
+    const uri_e = 'http://200.12.136.75:5000/dbegresados'
+    const uri_i = 'http://200.12.136.75:5000/dbinscriptos'
+    const uri_a = 'http://200.12.136.75:5000/alutivos'
+    const uri_c = 'http://200.12.136.75:5000/cursadas'
 
     //const [cantidadI, setCantidadI] = useState(0)
     const [cantidadSedeEgr, setCantidadEgr] = useState(null)
     const [cantidadAlu, setCantidadAlu] = useState(null)
     const [cantidadInsc, setCantidadInsc] = useState(null)
+    const [cantidadComiAnio, setCantidadComiAnio] = useState(null)
+
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
 
@@ -23,7 +26,7 @@ export const usePageInicial = (anio) => {
         traerInscriptosSede(anio)
         traerCantidadPorSede(anio)
         traerAlumnosActivosSede()
-
+        traerComisionesAnio(anio)
     }, [anio])
 
     //egresados anio en curso
@@ -63,5 +66,15 @@ export const usePageInicial = (anio) => {
         }
     }
 
-    return { loading, error, cantidadSedeEgr, cantidadInsc, cantidadAlu }
+    const traerComisionesAnio = async () => {
+        try {
+            const rows = await axios.get(`${uri_c}/comisionesanio/${anio}`)
+            setCantidadComiAnio(rows.data)
+        } catch (error) {
+            setError(error)
+            console.log(error)
+        }
+    }
+
+    return { loading, error, cantidadSedeEgr, cantidadInsc, cantidadAlu, cantidadComiAnio }
 }

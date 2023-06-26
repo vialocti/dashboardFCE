@@ -18,6 +18,9 @@ const IngresantesPageEntreAnios = () => {
     const getTraerDatos = async ()=>{
       
         console.log('eureka')
+        
+
+        
 
     
     }
@@ -41,11 +44,11 @@ const IngresantesPageEntreAnios = () => {
 
   const onHandleinfo =async ()=>{
     setIngreAnios( await traerIngresantesEntreAnios(anioi,aniof))
-    //console.log(anioi, aniof)
+  
   }
 
-  //console.warn(cantidadI,cantidaSede) 
-  
+   
+  //console.log(ingreAnios)
   return (
     <div className='container'>
     <Wrapper>
@@ -99,23 +102,64 @@ const IngresantesPageEntreAnios = () => {
     </Wrapper>
     <br />
     <div className="row">
-      <h3>Ingresantes</h3>
+      <h3>Comparativa Ingresantes entre Años Sucesivos  </h3>
     </div>
+    <br />
     <div className="row">
       
-     <table className='table table-bordered'>
+     <div className="col-md-5 col-xs-12">
+      <table className='table table-bordered table-striped'>
+     <thead>
+       
        <tr>
         <th>Año</th>
-        <th>Nro.Ingresantes</th>
+        <th>Nro.Ingr.PrimeraVFCE</th>
+        <th>Nro.Ingr.C.Carrera</th>
        </tr>
+      </thead>
+      <tbody>
     {ingreAnios ? ingreAnios.map((ele,index) =>
          <tr key={index}>
-         <td>{ele.anio}</td> 
-         <td>{ele.total.canti}</td> 
-        
+          <td>{ele.anio}</td> 
+          <td>{ele.totalI}</td> 
+          <td>{ele.totalIC}</td>
         </tr>
       ):null}   
+     </tbody>
      </table>
+     </div>
+
+     <div className="col-md-1 col-xs-12">
+
+     </div>
+     <div className="col-md-6 col-xs-12">
+        <table className='table table-bordered table-striped'>
+        
+          <tr>
+             <td>Nro.Ingr.PrimeraVFCE</td>
+            <tr>
+              <td>tipo_ingreso 1, con título secundario</td>
+
+            </tr>
+            <tr>
+              <td>tipo_ingreso 3, mayor 25 años</td>
+              
+            </tr>
+            <tr>
+              <td>tipo_ingreso 4, proveniente de Otra Universidad</td>
+              
+            </tr>
+            <tr>
+              <td>tipo_ingreso 5, proveniente de Otra Facultad UNCU</td>
+              
+            </tr>
+            </tr>
+          <tr>
+            <td>Nro.Ingr.C.Carrera</td>
+            <td>Solo tipo de ingreso 6, Proveniente de otra Carrera</td>
+          </tr>
+        </table>
+     </div>
     </div>
    </div>
   )
